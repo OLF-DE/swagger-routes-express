@@ -368,6 +368,18 @@ async function correspondingMiddlewareFunction(req, res, next) {
 
 - [More information…](https://duckduckgo.com/?q=express+auth+middleware) (via DuckDuckGo)
 
+### Adding middleware to each handler
+
+You can add middlewares to every handler by passing in a `middlewares` option:
+
+```js
+{
+  middlewares: [someMiddlewareFunction]
+}
+```
+
+The middleware is executed before each handler.
+
 ### Adding other path-level middleware
 
 You can add your own path specific middleware by passing in a `middleware` option:

@@ -10,6 +10,8 @@ declare module 'swagger-routes-express' {
       [key: string]: Handler
     }
 
+    middlewares?: Handler[]
+
     middleware?: {
       [key: string]: Handler
     }

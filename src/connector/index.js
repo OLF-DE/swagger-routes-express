@@ -39,7 +39,9 @@ const connector = (api, apiDefinition, options = {}) => {
   return app => {
     paths.forEach(({ method, route, operationId, security, middleware }) => {
       const auth = connectSecurity(security, options)
-      const controller = connectController(api, operationId, options)
+      const controller = (options.middlewares && Array.isArray(options.middlewares)) ?
+        [...options.middlewares, ...connectController(api, operationId, options)] :
+        connectController(api, operationId, options);
 
       const descriptor = [route]
       if (auth) descriptor.push(auth)
