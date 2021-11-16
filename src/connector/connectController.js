@@ -6,12 +6,13 @@ const allAboard = (isFun, fun) => typeof fun === 'function' && isFun
 const connectController = (api, operationId, options) => {
   const { notFound = nf, notImplemented = ni } = options
   const controller = api[operationId]
+  const middlewares = (options.middlewares && Array.isArray(options.middlewares)) ? options.middlewares : [];
 
   return operationId
     ? typeof controller === 'function'
-      ? controller
+      ? [... middlewares, controller]
       : Array.isArray(controller) && controller.reduce(allAboard, true)
-      ? controller
+      ? [... middlewares, ...controller]
       : notImplemented
     : notFound
 }
